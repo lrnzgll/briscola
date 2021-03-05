@@ -3,7 +3,6 @@
 module Cards
   # Creates 40 Cards [Ace-King, Hearts Clubs Diamonds Spades], also creates Suits and Ranks
   class CreatorService
-    include Callable
 
     SUITS = %w[Hearts Clubs Diamonds Spades].map do |suit|
       {
@@ -15,6 +14,10 @@ module Cards
     RANKS = %w[Ace 2 3 4 5 6 7 Jack Queen King].freeze
 
     def initialize; end
+
+    def self.call
+      new.call
+    end
 
     def call
       ActiveRecord::Base.transaction do

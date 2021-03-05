@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
-  def new
-    @match = Match.new
+  def show
+    
   end
-
-  def create
-    binding.pry
-  end
-
 end

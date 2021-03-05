@@ -1,10 +1,10 @@
+<%= link_to 'Logout',  destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
 <div class='container mt-3'>
   <h1>Dashboard</h1>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-match-modal">
-  New Match
-</button>
-
-  <%= render partial: 'pages/modals/new_match' %>
-  <%= link_to 'Logout',  destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
+  <div class='container'>
+    <div>
+      <p>Copia il link e invialo all'avversario</p>
+      <p><%=link_to(t('dashboard.links.start_online_game'), match_url(id: @match.id )) %></p>
+    </div>
+  </div> 
 </div>

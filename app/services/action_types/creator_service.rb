@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-module Actions
+module ActionTypes
   # Creates all action types used in the game
   class CreatorService
-    include Callable
+
+    def self.call
+      new.call
+    end
 
     def call
       ActiveRecord::Base.transaction do

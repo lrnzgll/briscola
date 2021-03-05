@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_09_13_134553) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "action_types", force: :cascade do |t|
@@ -65,22 +66,15 @@ ActiveRecord::Schema.define(version: 2020_09_13_134553) do
     t.index ["match_id"], name: "index_deals_on_match_id"
   end
 
-  create_table "matches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "match_result"
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
+  create_table "matches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
   create_table "participants", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "match_id"
+    t.uuid "match_id"
     t.integer "initial_player_order"
-    t.integer "score", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_participants_on_match_id"
